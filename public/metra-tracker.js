@@ -7,10 +7,18 @@ MetraTracker.locateRider = function(curious) {
     // Do we care?
   }
 
-  function successCallback(curious) {
+  function successCallback(updatePage) {
     return function(p) {
-      curious("Things are progressing... ok?");
-      // alert('lat='+p.coords.latitude.toFixed(2)+';lon='+p.coords.longitude.toFixed(2));
+      $.ajax({
+        url: "/status",
+        data: p.coords,
+        success: function(data, textStatus, request) {
+          updatePage({success: true, data: data});
+        }, 
+        error: function(request, textStatus, errorThrown) {
+          updatePage({failed: true})
+        }
+      });
     };
   }
 

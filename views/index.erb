@@ -15,8 +15,14 @@
 
 <script>
 $("#yes-metra").click(function() {
-  MetraTracker.locateRider(function(info) {
-    $("#status").html(info);
+  MetraTracker.locateRider(function(locationResponse) {
+    var status;
+    if (locationResponse.success) {
+      status = locationResponse.data;
+    } else {
+      status = "Actually, I can't figure out what's going on. Try " + '<a href="/">starting over</a>.' + " Mkay?";
+    }
+    $("#status").html(status);
   });
 
   $("#choices").slideUp();

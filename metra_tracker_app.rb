@@ -7,8 +7,6 @@ get "/" do
   erb :index
 end
 
-MetraTracker.lines.each do |line|
-  get("/" + line.line_key.to_s) do
-    line.name + " is teh bom"
-  end
+get "/status" do
+  "PARAMS: #{params.inspect}"
 end
