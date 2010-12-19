@@ -1,0 +1,16 @@
+/* via http://ofps.oreilly.com/titles/9780596805784 */
+
+body {
+    background-color: #ddd; /* Background color */
+    color: #222;            /* Foreground color used for text */
+    font-family: Helvetica; 
+    font-size: 14px;
+    margin: 0;              /* Amount of negative space around the outside of the body */
+    padding: 0;             /* Amount of negative space around the inside of the body */
+}
+
+#train-lines ul {
+    list-style: none;
+    margin: 10px;
+    padding: 0;
+}
