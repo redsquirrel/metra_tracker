@@ -34,13 +34,13 @@ h2.header {
   font-size: 20px;
 }
 
-#train-lines ul {
+ul {
     list-style: none;
     margin: 10px;
     padding: 0;
 }
 
-#train-lines ul li a {
+ul li a {
     background-color: #FFFFFF;
     border: 1px solid #999999;
     color: #222222;
