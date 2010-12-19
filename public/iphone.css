@@ -22,6 +22,10 @@ body {
   text-decoration: none;
 }
 
+.with_link {
+  text-decoration: underline;  
+}
+
 h1.header {
   font-size: 24px;
 }
