@@ -1,17 +1,18 @@
 var MetraTracker = {};
 
-MetraTracker.locateRider = function(curious) {
+MetraTracker.locateRider = function(onTime, updatePage) {
   if (geo_position_js.init()) {
-  	geo_position_js.getCurrentPosition(successCallback(curious), errorCallback, { enableHighAccuracy:true });
+  	geo_position_js.getCurrentPosition(successCallback(onTime, updatePage), errorCallback, { enableHighAccuracy:true });
   } else {
     // Do we care?
+    // alert('unable to init');
   }
 
-  function successCallback(updatePage) {
+  function successCallback(onTime, updatePage) {
     return function(p) {
       $.ajax({
         url: "/status",
-        data: p.coords,
+        data: $.extend(p.coords, {late: !onTime}),
         success: function(data, textStatus, request) {
           updatePage({success: true, data: data});
         }, 
@@ -23,7 +24,8 @@ MetraTracker.locateRider = function(curious) {
   }
 
   function errorCallback(p) {
-    // Do we care? // alert('error='+p.code);
+    // Do we care?
+    // alert('error='+p.code);
   }
 };
 

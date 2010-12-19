@@ -8,5 +8,5 @@ get "/" do
 end
 
 get "/status" do
-  "PARAMS: #{params.inspect}"
+  MetraTracker.tell_me_what_is_up(params)  
 end

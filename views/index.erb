@@ -4,8 +4,16 @@
   <li><a id="no-metra" href="#">No Metra riding for me at present.</a></li>
 </ul>
 
-<div id="train-line" style="display: none;">
-  <h2 class="header">Cool. Here's what's up.</h2>
+<div id="late-or-not" style="display: none;">
+  <h2 class="header">Great. But is your train on schedule?</h2>
+  <ul>
+    <li><a id="on-time" href="#">Yes. We're like a well-oiled machine.</a></li>
+    <li><a id="is-late" href="#">No. :(</a></li>
+  </ul>
+</div>
+
+<div id="what-is-up" style="display: none;">
+  <h2 class="header">OK. Here's what's up.</h2>
   <div id="status"><img src="/ajax-loader.gif" /></div>
 </div>
 
@@ -14,8 +22,11 @@
 </h2>
 
 <script>
-$("#yes-metra").click(function() {
-  MetraTracker.locateRider(function(locationResponse) {
+function locate(onTime) {
+  $("#late-or-not").slideUp();
+  $("#what-is-up").slideDown();
+  
+  MetraTracker.locateRider(onTime, function(locationResponse) {
     var status;
     if (locationResponse.success) {
       status = locationResponse.data;
@@ -24,9 +35,16 @@ $("#yes-metra").click(function() {
     }
     $("#status").html(status);
   });
-
+}
+$("#on-time").click(function() {
+  locate(true);
+});
+$("#is-late").click(function() {
+  locate(false);
+});
+$("#yes-metra").click(function() {
   $("#choices").slideUp();
-  $("#train-line").slideDown();
+  $("#late-or-not").slideDown();
 });
 $("#no-metra").click(function() {
   $("#choices").slideUp();
