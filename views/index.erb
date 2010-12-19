@@ -1,11 +1,11 @@
-<h1>Metra Tracker</h1>
+<h1 class="header">Metra Tracker</h1>
 <div id="choices">
   <div id="happy-choice" style="margin-bottom: 1em;"><button id="yes-metra">I am riding the Metra right now!</button></div>
   <div id="weak-choice"><button id="no-metra">No Metra riding for me at present.</button></div>
 </div>
 
 <div id="train-lines" style="display: none;">
-  <h2>On which line are you riding?</h2>
+  <h2 class="header">On which line are you riding?</h2>
   <ul>
   <% MetraTracker.lines.each do |line| %>
     <li><a href="<%= line.line_key %>"><%= line.name %></a></li>
