@@ -1,14 +1,17 @@
 var MetraTracker = {};
 
-MetraTracker.locateRider = function() {
+MetraTracker.locateRider = function(curious) {
   if (geo_position_js.init()) {
-  	geo_position_js.getCurrentPosition(successCallback, errorCallback, { enableHighAccuracy:true });
+  	geo_position_js.getCurrentPosition(successCallback(curious), errorCallback, { enableHighAccuracy:true });
   } else {
     // Do we care?
   }
 
-  function successCallback(p) {
-    // alert('lat='+p.coords.latitude.toFixed(2)+';lon='+p.coords.longitude.toFixed(2));
+  function successCallback(curious) {
+    return function(p) {
+      curious("Things are progressing... ok?");
+      // alert('lat='+p.coords.latitude.toFixed(2)+';lon='+p.coords.longitude.toFixed(2));
+    };
   }
 
   function errorCallback(p) {

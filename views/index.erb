@@ -4,13 +4,9 @@
   <li><a id="no-metra" href="#">No Metra riding for me at present.</a></li>
 </ul>
 
-<div id="train-lines" style="display: none;">
-  <h2 class="header">On which line are you riding?</h2>
-  <ul>
-  <% MetraTracker.lines.each do |line| %>
-    <li><a href="<%= line.line_key %>"><%= line.name %></a></li>
-  <% end %>
-  </ul>
+<div id="train-line" style="display: none;">
+  <h2 class="header">Cool. Here's what's up.</h2>
+  <div id="status"><img src="http://producttweet.com/images/spinner.gif" /></div>
 </div>
 
 <h2 id="try-again" class="header with-link" style="display: none;">
@@ -19,9 +15,12 @@
 
 <script>
 $("#yes-metra").click(function() {
-  MetraTracker.locateRider();
+  MetraTracker.locateRider(function(info) {
+    $("#status").html(info);
+  });
+
   $("#choices").slideUp();
-  $("#train-lines").slideDown();
+  $("#train-line").slideDown();
 });
 $("#no-metra").click(function() {
   $("#choices").slideUp();
