@@ -13,9 +13,15 @@ describe MetraTracker do
     end
     
     context "near Track" do
-      it "reports on track" do
+      it "reports on track in Wheaton" do
         football_field = ["41.867394", "-88.095999"]
         params = {"latitude" => football_field.first, "longitude" => football_field.last}
+        MetraTracker.tell_me_what_is_up(params).should be_on_track
+      end
+      
+      it "reports on track in Lombard" do
+        prairie_ave = ["41.89220082", "-88.00266736"]
+        params = {"latitude" => prairie_ave.first, "longitude" => prairie_ave.last}
         MetraTracker.tell_me_what_is_up(params).should be_on_track
       end
       
