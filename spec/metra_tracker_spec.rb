@@ -2,7 +2,7 @@ require "metra_tracker"
 
 describe MetraTracker do
   before(:each) do
-    MetraTracker.should_receive(:store_in_mongo)
+    MetraTracker::Mongo.should_receive(:store)
   end
   
   context "in Chicagoland" do
