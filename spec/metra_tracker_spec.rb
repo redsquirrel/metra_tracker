@@ -28,8 +28,8 @@ describe MetraTracker do
     
     context "far from Track" do
       it "reports off track" do
-        cloverleaf = ["41.861603", "-87.930965"]
-        params = {"latitude" => cloverleaf.first, "longitude" => cloverleaf.last}
+        intersection = ["41.859222", "-88.10252"]
+        params = {"latitude" => intersection.first, "longitude" => intersection.last}
         MetraTracker.tell_me_what_is_up(params).should_not be_on_track
       end
     end

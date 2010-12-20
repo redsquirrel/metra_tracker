@@ -76,7 +76,7 @@ module MetraTracker
     def on_line(params)
       return false unless in_bounds?(params)
       distance, line = distance_from_a_track(params)
-      return line if distance < 0.03 # fairly arbitrary threshold
+      return line if distance < 0.001 # fairly arbitrary threshold
     end
 
     def distance_from_a_track(params)
