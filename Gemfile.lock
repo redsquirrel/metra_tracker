@@ -3,6 +3,7 @@ GEM
   specs:
     bson (1.1.5)
     bson_ext (1.1.5)
+    fastercsv (1.5.3)
     metra_schedule (0.3.1)
       nokogiri (>= 1.4.1)
     mongo (1.1.5)
@@ -19,6 +20,7 @@ PLATFORMS
 
 DEPENDENCIES
   bson_ext (= 1.1.5)
+  fastercsv (= 1.5.3)
   metra_schedule
   mongo (= 1.1.5)
   sinatra (= 1.1.0)
