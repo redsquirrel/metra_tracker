@@ -12,6 +12,7 @@ MetraTracker.locateRider = function(onTime, updatePage) {
     return function(p) {
       $.ajax({
         url: "/status",
+        type: "POST",
         data: $.extend(p.coords, {late: !onTime}),
         success: function(data, textStatus, request) {
           updatePage({success: true, data: data});

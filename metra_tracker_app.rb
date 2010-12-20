@@ -7,6 +7,6 @@ get "/" do
   erb :index
 end
 
-get "/status" do
+post "/status" do
   MetraTracker.tell_me_what_is_up(params).to_s
 end
