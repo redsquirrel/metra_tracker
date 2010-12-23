@@ -1,5 +1,6 @@
-require 'uri'
 require 'mongo'
+require "time"
+require 'uri'
 
 module MetraTracker
   module Mongo

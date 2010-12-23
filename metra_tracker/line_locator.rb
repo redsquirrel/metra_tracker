@@ -1,3 +1,6 @@
+require "fastercsv"
+require "metra"
+
 module MetraTracker
   module LineLocator
     class << self
@@ -32,7 +35,7 @@ module MetraTracker
             params["latitude"].to_f,
             params["longitude"].to_f
           ),
-          closest_edge.line        
+          closest_edge #actually returns an edge, not a line TODO
         ]
       end
 
@@ -79,14 +82,21 @@ module MetraTracker
         @station_a = station_a
         @station_b = station_b
       end
-    end    
+      
+      def stations
+        [@station_a, @station_b].map(&:name)
+      end
+    end
 
     geo_file = File.join(File.dirname(__FILE__), "..", "analysis", "geocodes.csv")
     geo_data = FasterCSV.read(geo_file)
 
     EDGES = []
+    metra_schedule = Metra.new
     MetraSchedule::TrainData::LINES.each do |line_key, data|
       next if line_key == :me # Electric line is not well geocoded yet
+      line = metra_schedule.line(line_key)
+      line.load_schedule
 
       stations = data[:stations]
       i = 0
@@ -101,7 +111,7 @@ module MetraTracker
         end
 
         EDGES << Edge.new(
-          data[:name],
+          line,
           Station.new(station_a, geo_datum_a[1], geo_datum_a[2]),
           Station.new(station_b, geo_datum_b[1], geo_datum_b[2])
         )

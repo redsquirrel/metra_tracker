@@ -1,4 +1,5 @@
 require "metra_tracker"
+require "time"
 
 describe MetraTracker do
   before(:each) do
@@ -29,6 +30,32 @@ describe MetraTracker do
         football_field = ["41.867394", "-88.095999"]
         params = {"latitude" => football_field.first, "longitude" => football_field.last}
         MetraTracker.tell_me_what_is_up(params).line.should == "Union Pacific West"
+      end
+
+      it "reports which edge" do
+        quarry = [41.898508, -87.958281]
+        params = {"latitude" => quarry.first, "longitude" => quarry.last}
+        stops = MetraTracker.tell_me_what_is_up(params).between
+        stops.should include(:elmhurst)
+        stops.should include(:villa_park)
+      end      
+      
+      context "on Train" do
+        it "reports on train" do
+          Date.stub!(:today).and_return(Date.parse("Dec 20, 2010"))
+          Time.stub!(:now).and_return(Time.parse("Dec 20, 2010 8:25am"))
+          quarry = [41.898508, -87.958281]
+          params = {"latitude" => quarry.first, "longitude" => quarry.last}
+          MetraTracker.tell_me_what_is_up(params).should be_on_train
+        end
+        
+        it "reports which train" do
+          Date.stub!(:today).and_return(Date.parse("Dec 20, 2010"))
+          Time.stub!(:now).and_return(Time.parse("Dec 20, 2010 8:25am"))
+          quarry = [41.898508, -87.958281]
+          params = {"latitude" => quarry.first, "longitude" => quarry.last}
+          MetraTracker.tell_me_what_is_up(params).train.should == 36
+        end
       end
     end
     
