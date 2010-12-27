@@ -11,7 +11,6 @@ module MetraTracker
     def tell_me_what_is_up(params)
       Mongo.store(params)
 
-      # TODO Collect all possible edges, instead of just the first one we find
       edge = on_edge(params)
       line = edge && edge.line && edge.line.name
       train = on_train(edge, params) if edge
